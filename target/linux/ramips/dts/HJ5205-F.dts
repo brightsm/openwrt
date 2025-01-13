@@ -5,7 +5,7 @@
 #include <dt-bindings/input/input.h>
 
 / {
-	compatible = "huijietek,HJ5205-F", "ralink,mt7620a-soc";
+	compatible = "HuiJieTek,HJ5205-F", "ralink,mt7620a-soc";
 	model = "HJ5205-F";
 
 	chosen {
