@@ -377,7 +377,7 @@ zbt-we826)
 	set_wifi_led "$board:green:wifi"
 	set_usb_led "$board:green:usb"
 	;;
-HJ5205-F)
+hj5205-f)
 	ucidef_set_led_default "power" "power" "$board:green:power" "1"
 	set_wifi_led "$board:green:wifi"
 	set_usb_led "$board:green:usb"
