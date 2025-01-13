@@ -102,7 +102,7 @@
 
 &ethernet {
 	mtd-mac-address = <&factory 0x4>;
-	ralink,port-map = "wllll";
+	ralink,port-map = "llllw";
 };
 
 &wmac {
