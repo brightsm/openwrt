@@ -418,13 +418,13 @@ define Device/zbt-we826
 endef
 TARGET_DEVICES += zbt-we826
 
-define Device/HJ5205-F
+define Device/hj5205-f
   DTS := HJ5205-F
   IMAGE_SIZE := $(ralink_default_fw_size_16M)
   DEVICE_TITLE := HuiJieTek HJ5205-F
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mt76 kmod-sdhci-mt7620 
 endef
-TARGET_DEVICES += HJ5205-F
+TARGET_DEVICES += hj5205-f
 
 define Device/zbt-wr8305rt
   DTS := ZBT-WR8305RT
