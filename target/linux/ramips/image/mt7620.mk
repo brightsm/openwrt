@@ -421,7 +421,7 @@ TARGET_DEVICES += zbt-we826
 define Device/hj5205-f
   DTS := HJ5205-F
   IMAGE_SIZE := $(ralink_default_fw_size_16M)
-  DEVICE_TITLE := HuiJieTek HJ5205-F
+  DEVICE_TITLE := Huijietek HJ5205-F
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mt76 kmod-sdhci-mt7620 
 endef
 TARGET_DEVICES += hj5205-f
