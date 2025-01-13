@@ -103,12 +103,15 @@ ramips_setup_interfaces()
 	youku-yk1|\
 	zbt-ape522ii|\
 	zbt-we826|\
-	hj5205-f|\
 	zbt-wg2626|\
 	zbt-wg3526|\
 	zbt-wr8305rt)
 		ucidef_add_switch "switch0" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "4:wan" "6@eth0"
+		;;
+	hj5205-f)
+		ucidef_add_switch "switch0" \
+			"0:wan" "1:lan" "2:lan" "3:lan" "4:lan" "6@eth0"
 		;;
 	whr-300hp2|\
 	whr-600d|\
