@@ -6,7 +6,7 @@
 
 / {
 	compatible = "Huijietek,hj5205-f", "ralink,mt7620a-soc";
-	model = "HJ5205-F";
+	model = "Huijietek HJ5205-F";
 
 	chosen {
 		bootargs = "console=ttyS0,57600";
