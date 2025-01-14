@@ -186,6 +186,9 @@ get_status_led() {
 	zbt-we826)
 		status_led="$board:green:wifi"
 		;;
+  	hj5205-f)
+		status_led="$board:green:wifi"
+		;;
 	psr-680w)
 		status_led="$board:red:wan"
 		;;
