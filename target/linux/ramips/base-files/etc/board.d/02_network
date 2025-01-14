@@ -458,6 +458,9 @@ ramips_setup_macs()
 
 board_config_update
 board=$(ramips_board_name)
+echo "board's name="
+echo $board
+echo "ramips_setup_interfaces.....................>"
 ramips_setup_interfaces $board
 ramips_setup_macs $board
 board_config_flush
