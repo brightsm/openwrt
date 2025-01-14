@@ -179,6 +179,7 @@ platform_check_image() {
 	zbt-cpe102|\
 	zbt-wa05|\
 	zbt-we826|\
+ 	hj5205-f|\
 	zbt-wg2626|\
 	zbt-wg3526|\
 	zbt-wr8305rt|\
