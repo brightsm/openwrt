@@ -13,7 +13,8 @@ set_wifi_led() {
 
 
 board=$(ramips_board_name)
-
+echo "setup led info............."
+echo $board
 board_config_update
 
 case $board in
