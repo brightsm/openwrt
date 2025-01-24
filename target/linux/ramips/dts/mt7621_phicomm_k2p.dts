@@ -51,6 +51,7 @@
 		compatible = "jedec,spi-nor";
 		reg = <0>;
 		spi-max-frequency = <50000000>;
+		broken-flash-reset;
 
 		partitions {
 			compatible = "fixed-partitions";
@@ -174,7 +175,4 @@
 	macaddr_factory_e006: macaddr@e006 {
 		reg = <0xe006 0x6>;
 	};
-};
-&flash {
-	broken-flash-reset;
 };
