@@ -47,7 +47,7 @@
 &spi0 {
 	status = "okay";
 
-	flash@0 {
+	flash: flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
 		spi-max-frequency = <50000000>;
@@ -81,7 +81,7 @@
 				read-only;
 			};
 
-			partition@a0000 {
+			firmware: partition@a0000 {
 				compatible = "denx,uimage";
 				label = "firmware";
 				reg = <0xa0000 0x1f60000>;
@@ -174,4 +174,7 @@
 	macaddr_factory_e006: macaddr@e006 {
 		reg = <0xe006 0x6>;
 	};
+};
+&flash {
+	broken-flash-reset;
 };
