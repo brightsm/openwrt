@@ -1,0 +1,5 @@
+--- /dev/null
++++ b/drivers/usb/serial/testme3760
+@@ -0,0 +1 @@
++//this is a patch test file
+\ No newline at end of file
