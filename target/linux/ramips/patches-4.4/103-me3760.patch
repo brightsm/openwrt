@@ -1,29 +1,20 @@
 --- a/drivers/usb/serial/option.c
 +++ b/drivers/usb/serial/option.c
-@@ -317,6 +317,7 @@ static void option_instat_callback(struct urb *urb);
- #define ZTE_PRODUCT_MC2718			0xffe8
- #define ZTE_PRODUCT_AD3812			0xffeb
- #define ZTE_PRODUCT_MC2716			0xffed
-+#define ZTE_PRODUCT_2_6G			0x0199
+@@ -2037,6 +2037,17 @@ static int option_probe(struct usb_serial *serial,
+ 	if (iface_desc->bInterfaceClass == 0x08)
+ 		return -ENODEV;
  
- #define BENQ_VENDOR_ID				0x04a5
- #define BENQ_PRODUCT_H10			0x4068
-@@ -596,6 +597,7 @@ static const struct usb_device_id option_ids[] = {
- 	{ USB_DEVICE(QUANTA_VENDOR_ID, QUANTA_PRODUCT_GLX) },
- 	{ USB_DEVICE(QUANTA_VENDOR_ID, QUANTA_PRODUCT_GKE) },
- 	{ USB_DEVICE(QUANTA_VENDOR_ID, QUANTA_PRODUCT_GLE) },
-+ 	{ USB_DEVICE(ZTE_VENDOR_ID, ZTE_PRODUCT_2_6G) },   
- 	{ USB_DEVICE(QUANTA_VENDOR_ID, 0xea42),
- 	  .driver_info = RSVD(4) },
- 	{ USB_DEVICE_AND_INTERFACE_INFO(HUAWEI_VENDOR_ID, 0x1c05, USB_CLASS_COMM, 0x02, 0xff) },
-@@ -1321,10 +1323,6 @@ static const struct usb_device_id option_ids[] = {
- 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0189, 0xff, 0xff, 0xff) },
- 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0191, 0xff, 0xff, 0xff), /* ZTE EuFi890 */
- 	  .driver_info = RSVD(4) },
--	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0196, 0xff, 0xff, 0xff) },
--	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0197, 0xff, 0xff, 0xff) },
--	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0199, 0xff, 0xff, 0xff), /* ZTE MF820S */
--	  .driver_info = RSVD(1) },
- 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0200, 0xff, 0xff, 0xff) },
- 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0201, 0xff, 0xff, 0xff) },
- 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0254, 0xff, 0xff, 0xff) },
++    /* Add ZTE ME3760 NDIS interface filtering */
++	#define ZTE_VENDOR_ID  0x19D2
++	#define ZTE_PRODUCT_ME3760 0x0199
++
++	if (dev_desc->idVendor == cpu_to_le16(ZTE_VENDOR_ID) &&
++	    dev_desc->idProduct == cpu_to_le16(ZTE_PRODUCT_ME3760) &&
++	    iface_desc->bInterfaceNumber == 1) {
++		dev_info(&serial->dev->dev, "Skipping NDIS interface for ZTE ME3760\n");
++		return -ENODEV;
++	}
++
+ 	/*
+ 	 * Don't bind reserved interfaces (like network ones) which often have
+ 	 * the same class/subclass/protocol as the serial interfaces.  Look at
