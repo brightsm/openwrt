@@ -8,13 +8,22 @@
  
  #define BENQ_VENDOR_ID				0x04a5
  #define BENQ_PRODUCT_H10			0x4068
-@@ -2053,6 +2054,10 @@ static int option_probe(struct usb_serial *serial,
- 	    iface_desc->bInterfaceClass != USB_CLASS_CDC_DATA)
- 		return -ENODEV;
- 
-+	if (dev_desc->idVendor == cpu_to_le16(ZTE_VENDOR_ID) &&
-+	    dev_desc->idProduct == cpu_to_le16(ZTE_PRODUCT_2_6G) &&
-+	    iface_desc->bInterfaceClass != USB_CLASS_CDC_DATA)
-+		return -ENODEV;
- 	/* Store the device flags so we can use them during attach. */
- 	usb_set_serial_data(serial, (void *)device_flags);
+@@ -596,6 +597,7 @@ static const struct usb_device_id option_ids[] = {
+ 	{ USB_DEVICE(QUANTA_VENDOR_ID, QUANTA_PRODUCT_GLX) },
+ 	{ USB_DEVICE(QUANTA_VENDOR_ID, QUANTA_PRODUCT_GKE) },
+ 	{ USB_DEVICE(QUANTA_VENDOR_ID, QUANTA_PRODUCT_GLE) },
++ 	{ USB_DEVICE(ZTE_VENDOR_ID, ZTE_PRODUCT_2_6G) },   
+ 	{ USB_DEVICE(QUANTA_VENDOR_ID, 0xea42),
+ 	  .driver_info = RSVD(4) },
+ 	{ USB_DEVICE_AND_INTERFACE_INFO(HUAWEI_VENDOR_ID, 0x1c05, USB_CLASS_COMM, 0x02, 0xff) },
+@@ -1321,10 +1323,6 @@ static const struct usb_device_id option_ids[] = {
+ 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0189, 0xff, 0xff, 0xff) },
+ 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0191, 0xff, 0xff, 0xff), /* ZTE EuFi890 */
+ 	  .driver_info = RSVD(4) },
+-	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0196, 0xff, 0xff, 0xff) },
+-	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0197, 0xff, 0xff, 0xff) },
+-	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0199, 0xff, 0xff, 0xff), /* ZTE MF820S */
+-	  .driver_info = RSVD(1) },
+ 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0200, 0xff, 0xff, 0xff) },
+ 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0201, 0xff, 0xff, 0xff) },
+ 	{ USB_DEVICE_AND_INTERFACE_INFO(ZTE_VENDOR_ID, 0x0254, 0xff, 0xff, 0xff) },
