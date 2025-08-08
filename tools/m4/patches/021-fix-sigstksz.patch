@@ -1,15 +1,13 @@
 --- a/lib/c-stack.c
 +++ b/lib/c-stack.c
-@@ -52,7 +52,11 @@
- #if HAVE_SIGALTSTACK
- # define C_STACK_MAX SIGSTKSZ
- #elif HAVE_LIBSIGSEGV
--# if SIGSTKSZ < 16384
-+# if defined(SIGSTKSZ) && (SIGSTKSZ) <= 65536
-+   /* Assume SIGSTKSZ is a compile-time constant. */
-+   # define C_STACK_MAX SIGSTKSZ
-+# elif defined(SIGSTKSZ)
-+   /* SIGSTKSZ is defined but not a compile-time constant; fall through. */
- #  define C_STACK_MAX 16384
- # else
- #  define C_STACK_MAX 16384
+@@ -52,7 +52,10 @@
+ #ifndef SIGSTKSZ
+ # define SIGSTKSZ 16384
+-#elif HAVE_LIBSIGSEGV && SIGSTKSZ < 16384
++#elif HAVE_LIBSIGSEGV
++# if defined(SIGSTKSZ) && (SIGSTKSZ) < 16384
++/* libsigsegv 2.6 through 2.8 have a bug where some architectures use
++   more than the Linux default of an 8k alternate stack when deciding */
+ # undef SIGSTKSZ
+ # define SIGSTKSZ 16384
+ #endif
