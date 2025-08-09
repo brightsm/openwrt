@@ -1,5 +1,5 @@
---- a/c-stack.c
-+++ b/c-stack.c
+--- a/lib/c-stack.c
++++ b/lib/c-stack.c
 @@ -52,13 +52,15 @@ typedef struct sigaltstack stack_t;
  #endif
  #ifndef SIGSTKSZ
