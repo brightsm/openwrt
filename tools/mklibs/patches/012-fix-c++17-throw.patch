@@ -1,0 +1,163 @@
+--- a/lib/mklibs/elf.hpp
++++ b/lib/mklibs/elf.hpp
+@@ -49,7 +49,7 @@
+     const section &get_section(unsigned int i) const
+-      throw (std::out_of_range) { return *sections.at(i); };
++      { return *sections.at(i); };
+
+     /* Return a pointer to the section header table.  */
+@@ -59,7 +59,7 @@
+     /* Open a file.  */
+-    static file *open(const char *filename) throw (std::bad_alloc, std::runtime_error);
++    static file *open(const char *filename);
+
+     /* Constructor for memory-based file.  */
+-    file(uint8_t *mem, size_t len) throw (std::bad_alloc);
++    file(uint8_t *mem, size_t len);
+
+     /* Open a file of the correct class.  */
+-    static file *open_class(uint8_t *, size_t) throw (std::bad_alloc, std::runtime_error);
++    static file *open_class(uint8_t *, size_t);
+
+@@ -128,7 +128,7 @@
+     /* Get a string from the string table.  */
+     std::string get_string(uint32_t offset) const
+-      throw (std::bad_alloc)
++      {
+     {
+       if (offset >= data.size())
+         throw std::bad_alloc();
+     }
+
+@@ -263,16 +263,16 @@
+     std::string get_version() const
+-      throw (std::bad_alloc);
++      ;
+
+     std::string get_version_file() const
+-      throw (std::bad_alloc);
++      ;
+
+     std::string get_name_version() const
+-      throw (std::bad_alloc);
++      ;
+
+     version_requirement()
+-      throw (std::bad_alloc);
++      ;
+
+--- a/lib/mklibs/elf_data.hpp
++++ b/lib/mklibs/elf_data.hpp
+@@ -94,7 +94,7 @@
+     file_data(uint8_t *mem, size_t len)
+-      throw (std::bad_alloc, std::runtime_error);
++      ;
+
+     virtual void update(const file &)
+-      throw (std::bad_alloc);
++      ;
+
+     section_real(Shdr *header, uint8_t *mem)
+-      throw (std::bad_alloc);
++      ;
+
+     void update(const file &)
+-      throw (std::bad_alloc);
++      ;
+
+     section_real(Shdr *header, uint8_t *mem)
+-      throw (std::bad_alloc);
++      ;
+
+     void update(const file &)
+-      throw (std::bad_alloc);
++      ;
+
+     section_real(Shdr *header, uint8_t *mem)
+-      throw (std::bad_alloc);
++      ;
+
+     void update(const file &)
+-      throw (std::bad_alloc);
++      ;
+
+     section_real(Shdr *header, uint8_t *mem)
+-      throw (std::bad_alloc);
++      ;
+
+     segment_real(Phdr *header, uint8_t *mem)
+-      throw (std::bad_alloc);
++      ;
+
+     void update_string(const section_type<section_type_STRTAB> &)
+-      throw (std::bad_alloc);
++      ;
+
+     void update_string(const section_type<section_type_STRTAB> &)
+-      throw (std::bad_alloc);
++      ;
+
+     void update_version(const file &, uint16_t)
+-      throw (std::bad_alloc);
++      ;
+
+     void update_string(const section_type<section_type_STRTAB> &)
+-      throw (std::bad_alloc);
++      ;
+
+     void update_string(const section_type<section_type_STRTAB> &)
+-      throw (std::bad_alloc);
++      ;
+
+     void update_string(const section_type<section_type_STRTAB> &)
+-      throw (std::bad_alloc);
++      ;
+
+--- a/lib/mklibs/elf.cpp
++++ b/lib/mklibs/elf.cpp
+@@ -36,7 +36,7 @@
+ /* Open a file.  */
+-file *file::open(const char *filename) throw (std::bad_alloc, std::runtime_error)
++file *file::open(const char *filename)
+ {
+   int fd;
+   struct stat st;
+@@ -72,7 +72,7 @@
+ /* Open a file of the correct class.  */
+-file *file::open_class(uint8_t *mem, size_t len) throw (std::bad_alloc, std::runtime_error)
++file *file::open_class(uint8_t *mem, size_t len)
+ {
+   class_t class_;
+
+@@ -86,7 +86,7 @@
+ file_data<_class, _data>::file_data(uint8_t *mem, size_t len)
+-  throw (std::bad_alloc, std::runtime_error)
++  : mem(mem), len(len)
+ {
+   if (len < sizeof(Elf_Ehdr))
+     throw std::runtime_error("file too short");
+@@ -188,7 +188,7 @@
+ template <class _class, class _data>
+ void section_data<_class, _data>::update(const file &file)
+-  throw (std::bad_alloc)
++{
+   {
+     /* Update the section data.  */
+   }
+@@ -202,7 +202,7 @@
+ template <class _class, class _data>
+ section_real<_class, _data, section_type_DYNAMIC>::section_real(Shdr *header, uint8_t *mem)
+-  throw (std::bad_alloc)
++  : section_data<_class, _data>(header, mem)
+ {
+   /* Parse the dynamic section.  */
+ }
+@@ -219,7 +219,7 @@
+ template <class _class, class _data>
+ void section_real<_class, _data, section_type_DYNAMIC>::update(const file &file)
+-  throw (std::bad_alloc)
++{
+   {
+     /* Update the dynamic section.  */
+   }
+ }
