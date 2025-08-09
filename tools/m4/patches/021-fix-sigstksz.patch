@@ -1,5 +1,3 @@
-diff --git a/c-stack.c b/c-stack.c
-index 5353c08660d3e8d00e11a53f8af04e8a1f317a02..b778c0cd8f3a5c822d9448deb32cbfb60bb546bb 100644
 --- a/c-stack.c
 +++ b/c-stack.c
 @@ -52,13 +52,15 @@ typedef struct sigaltstack stack_t;
