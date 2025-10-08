@@ -585,11 +585,12 @@ endef
 TARGET_DEVICES += hiwifi_hc5861
 
 define Device/huijietek_hj5205-f
-  DTS := hj5205-f
+  SOC := mt7620a
+  IMAGE_SIZE := 16064k
   DEVICE_VENDOR := Huijietek
   DEVICE_MODEL := HJ5205-F
-  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-sdhci-mt7620
-  KERNEL_SIZE := 6016k
+  DEVICE_VARIANT := 16M
+  DEVICE_PACKAGES := kmod-usb-core kmod-usb2 kmod-sdhci-mt7620  
   SUPPORTED_DEVICES += hj5205-f
 endef
 TARGET_DEVICES += huijietek_hj5205-f
